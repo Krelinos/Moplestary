@@ -1,0 +1,9 @@
+res://node_2d.tscn
+res://Scenes/node_2d.tscn
+res://Scripts/Background.cs
+res://Scripts/MyCharacter.cs
+res://Scripts/PlayerCamera.cs
+res://Scenes/Game.tscn
+res://Scenes/player_character.tscn
+res://Scenes/Slime.cs
+res://Scenes/slime.tscn

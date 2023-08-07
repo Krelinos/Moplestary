@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "+qsPtyhXdOQYA7UCkbC46d0vXdXzLpAmyhX2T9i4q6Jf1hPrcOviCuhBG5j4wPpaB2G1/CB81ur1E3lQIIj1+A==",
+  "success": true,
+  "projectFilePath": "D:\\Godot\\GodotProjects\\Moplestary\\Moplestary.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Emmer\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
+    "C:\\Users\\Emmer\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",
+    "C:\\Users\\Emmer\\.nuget\\packages\\godotsharpeditor\\4.1.1\\godotsharpeditor.4.1.1.nupkg.sha512",
+    "C:\\Users\\Emmer\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\Emmer\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\Emmer\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
+  ],
+  "logs": []
+}
