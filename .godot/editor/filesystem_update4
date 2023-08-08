@@ -1,6 +1,0 @@
-res://Scenes/Game.tscn
-res://Scripts/Background.cs
-res://Scripts/MyCharacter.cs
-res://Scripts/PlayerCamera.cs
-res://Scripts/Slime.cs
-res://Scenes/slime.tscn
