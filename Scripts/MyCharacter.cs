@@ -167,7 +167,7 @@ public partial class MyCharacter : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public void _on_area_2d_body_entered( Node2D body )
+	public void _OnProjectileTargetAreaAreaEntered( Area2D area )
 	{
 	}
 }

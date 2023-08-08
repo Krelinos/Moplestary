@@ -1189,7 +1189,6 @@ sources/1 = SubResource("TileSetAtlasSource_7vnvg")
 scale = Vector2(3.6, 3.6)
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-position = Vector2(0, 147.222)
 zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_right = 2300
