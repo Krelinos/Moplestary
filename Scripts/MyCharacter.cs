@@ -24,7 +24,7 @@ public partial class MyCharacter : CharacterBody2D
 	{
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		hitbox = GetNode<CollisionShape2D>("Hitbox");
-		tileMap = GetNode<TileMap>("/root/Game/TileMap");
+		tileMap = GetNode<TileMap>("/root/Game/Terrain");
 	}
 
 	public override void _PhysicsProcess(double delta)

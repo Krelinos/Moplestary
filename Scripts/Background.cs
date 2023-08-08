@@ -4,25 +4,37 @@ using System;
 public partial class Background : Node2D
 {
 
-	private Node2D parallax1;
-	private Node2D parallax2;
-	private Node2D parallax3;
+	[Export] public float Parallax2CycleLength = 512;
+	[Export] public float Parallax2CycleOffset = 320;
+	[Export] public float Parallax3CycleLength = 1024;
+	[Export] public float Parallax3CycleOffset = 320;
 
-	private Camera2D camera;
+	private Node2D Parallax1;
+	private Node2D Parallax2;
+	private Node2D Parallax3;
+
+	private Vector2 Parallax2OriginalPosition;
+	private Vector2 Parallax3OriginalPosition;
+
+	private Camera2D Camera;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		parallax1 = GetNode<Node2D>("Parallax1");
-		parallax2 = GetNode<Node2D>("Parallax2");
-		parallax3 = GetNode<Node2D>("Parallax3");
+		Parallax1 = GetNode<Node2D>("Parallax1");
+		Parallax2 = GetNode<Node2D>("Parallax2");
+		Parallax3 = GetNode<Node2D>("Parallax3");
+
+		Parallax2OriginalPosition = Parallax2.Position;
+		Parallax2OriginalPosition = Parallax3.Position;
 		
-		camera = GetNode("/root/Game/PlayerCamera") as Camera2D;
+		Camera = GetNode("/root/Game/PlayerCamera") as Camera2D;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		GlobalPosition = camera.GetScreenCenterPosition();
+		GlobalPosition = Camera.GetScreenCenterPosition();
+		Parallax2.Position = Parallax2OriginalPosition + Parallax2CycleOffset * ( GlobalPosition / Parallax2CycleLength );
 	}
 }

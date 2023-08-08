@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1691378755
+::res://::1691461725
 icon.svg::CompressedTexture2D::1637192592950352361::1691267292::1691267300::1::::<><>::
 ::res://Assets/::1691363564
 background.png::CompressedTexture2D::3267451200892852839::1691269735::1691269736::1::::<><>::
@@ -20,9 +20,11 @@ Decors.png::CompressedTexture2D::1476620922576992707::1691270294::1691270294::1:
 ExampleTiles.png::CompressedTexture2D::7041856719779185559::1691270294::1691270294::1::::<><>::
 Mockup2x.png::CompressedTexture2D::4614987130371135736::1691270294::1691270294::1::::<><>::
 Tileset.png::CompressedTexture2D::6371285968732282665::1691270294::1691270294::1::::<><>::
-::res://Scenes/::1691380308
-Game.tscn::PackedScene::957691628192682112::1691380308::0::1::::<><>::res://Scripts/Background.cs<>uid://sv40pmkdiwvq::::res://Assets/CuteForest/BG1.png<>uid://bwb4g0ppbwn6p::::res://Assets/CuteForest/BG2.png<>uid://buyq1dsc63on0::::res://Assets/CuteForest/BG3.png<>res://Scripts/PlayerCamera.cs<>uid://vbjy34vvht5t::::res://Assets/CuteForest/Decors.png<>uid://cw1kfckg4ncx2::::res://Assets/CuteForest/Tileset.png<>uid://bk7ejp3f5p8lr::::res://Assets/LegacyAdventureForest.png<>uid://g1rov17l6ftn::::res://Scenes/player_character.tscn<>uid://uvpxowufj28o::::res://Assets/dungeontileset-extended.png
-player_character.tscn::PackedScene::475865218050572879::1691380308::0::1::::<><>::res://Scripts/MyCharacter.cs<>uid://uvpxowufj28o::::res://Assets/dungeontileset-extended.png
+::res://Scenes/::1691386362
+Game.tscn::PackedScene::957691628192682112::1691386362::0::1::::<><>::res://Scripts/Background.cs<>uid://sv40pmkdiwvq::::res://Assets/CuteForest/BG1.png<>uid://bwb4g0ppbwn6p::::res://Assets/CuteForest/BG2.png<>uid://buyq1dsc63on0::::res://Assets/CuteForest/BG3.png<>res://Scripts/PlayerCamera.cs<>uid://vbjy34vvht5t::::res://Assets/CuteForest/Decors.png<>uid://cw1kfckg4ncx2::::res://Assets/CuteForest/Tileset.png<>uid://bk7ejp3f5p8lr::::res://Assets/LegacyAdventureForest.png<>uid://g1rov17l6ftn::::res://Scenes/player_character.tscn<>uid://ipa7kk4n606i::::res://Scenes/slime.tscn
+player_character.tscn::PackedScene::475865218050572879::1691386322::0::1::::<><>::res://Scripts/MyCharacter.cs<>uid://uvpxowufj28o::::res://Assets/dungeontileset-extended.png
+Slime.cs::CSharpScript::-1::1691385742::0::1::::<><>::
+slime.tscn::PackedScene::592534102837906034::1691386322::0::1::::<><>::res://Scenes/Slime.cs<>uid://tupbw44i6u84::::res://Assets/Characters/Mobs/Slime Sprite Sheet.png
 ::res://Scripts/::1691369837
 Background.cs::CSharpScript::-1::1691369821::0::1::::<><>::
 MyCharacter.cs::CSharpScript::-1::1691378448::0::1::::<><>::

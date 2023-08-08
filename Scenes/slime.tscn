@@ -1,6 +1,5 @@
-[gd_scene load_steps=28 format=3 uid="uid://ipa7kk4n606i"]
+[gd_scene load_steps=27 format=3 uid="uid://ipa7kk4n606i"]
 
-[ext_resource type="Script" path="res://Scenes/Slime.cs" id="1_sna6l"]
 [ext_resource type="Texture2D" uid="uid://tupbw44i6u84" path="res://Assets/Characters/Mobs/Slime Sprite Sheet.png" id="2_01mos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twqwq"]
@@ -197,7 +196,6 @@ animations = [{
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource("1_sna6l")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.00002)
