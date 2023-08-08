@@ -3,10 +3,14 @@ using System;
 
 public partial class Background : Node2D
 {
-
-	[Export] public float Parallax2CycleLength = 512;
+	// Distance required to offset Parallax2 by Parallax2CycleOffset.
+	// Example: when Parallax2CycleLength is 512 and Parallax2CycleOffset is 64,
+	// once the camera's global position is (512, 256), Parallax2 will be offsetted
+	// by (-64, -32).
+	[Export] public float Parallax2CycleLength = 0b1000000000000000;	// 160384 I think
 	[Export] public float Parallax2CycleOffset = 320;
-	[Export] public float Parallax3CycleLength = 1024;
+
+	[Export] public float Parallax3CycleLength = 0b0100010000000000;
 	[Export] public float Parallax3CycleOffset = 320;
 
 	private Node2D Parallax1;
@@ -26,7 +30,7 @@ public partial class Background : Node2D
 		Parallax3 = GetNode<Node2D>("Parallax3");
 
 		Parallax2OriginalPosition = Parallax2.Position;
-		Parallax2OriginalPosition = Parallax3.Position;
+		Parallax3OriginalPosition = Parallax3.Position;
 		
 		Camera = GetNode("/root/Game/PlayerCamera") as Camera2D;
 	}
@@ -35,6 +39,9 @@ public partial class Background : Node2D
 	public override void _Process(double delta)
 	{
 		GlobalPosition = Camera.GetScreenCenterPosition();
-		Parallax2.Position = Parallax2OriginalPosition + Parallax2CycleOffset * ( GlobalPosition / Parallax2CycleLength );
+
+		Parallax2.Position = Parallax2OriginalPosition - Parallax2CycleOffset * ( GlobalPosition / Parallax2CycleLength );
+		Parallax3.Position = Parallax3OriginalPosition - Parallax3CycleOffset * ( GlobalPosition / Parallax3CycleLength );
+		GD.Print( Parallax2.Position );
 	}
 }
