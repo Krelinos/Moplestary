@@ -34,12 +34,12 @@ public partial class Slime : CharacterBody2D
 		// set {  }
 	}
 
-	// The character this mob is fighting.
+	// The character this mob is fighting. Null when wandering.
 	private Node2D target;
 	// -1 | Mob is moving left. 0 | Mob is still in the x-axis. 1 | Mob is moving right.
 	private int movementDirection;
 	// True | Mob is facing left. False | Mob is facing right.
-	private bool facingDirection;
+	private bool FlipH;
 	// Only change state (moving/idle) once this is < 0. Decreases by 1 every second.
 	private double wanderTime;
 
@@ -52,7 +52,7 @@ public partial class Slime : CharacterBody2D
 		RNG.Randomize();
 
 		movementDirection = 0;
-		facingDirection = true;
+		FlipH = true;
 		wanderTime = RNG.RandiRange( 2, 6 );
 	}
 
@@ -76,12 +76,12 @@ public partial class Slime : CharacterBody2D
 					if( RNG.Randf() < 0.5 )	// .Randf() returns a float between 0.0 and 1.0 (inclusive)
 					{
 						movementDirection = -1;
-						facingDirection = true;
+						FlipH = true;
 					}
 					else
 					{
 						movementDirection = 1;
-						facingDirection = false;
+						FlipH = false;
 					}
 				}
 				// Change state from moving to idle
@@ -114,7 +114,7 @@ public partial class Slime : CharacterBody2D
 						if( RNG.Randf() > 0.3f )
 						{
 							movementDirection *= -1;
-							facingDirection = !facingDirection;
+							FlipH = !FlipH;
 						}
 						else
 							velocity.Y = JumpVelocity;
@@ -169,7 +169,7 @@ public partial class Slime : CharacterBody2D
 		// 		SPRITE.Play("jump");
 		// }
 
-		SPRITE.FlipH = facingDirection;
+		SPRITE.FlipH = FlipH;
 
 		Velocity = velocity;
 		MoveAndSlide();

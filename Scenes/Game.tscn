@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://nv6bnvfqit5y"]
+[gd_scene load_steps=20 format=3 uid="uid://nv6bnvfqit5y"]
 
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="1_lo6r4"]
 [ext_resource type="Texture2D" uid="uid://sv40pmkdiwvq" path="res://Assets/CuteForest/BG1.png" id="2_xxpyb"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://g1rov17l6ftn" path="res://Scenes/player_character.tscn" id="9_md3vl"]
 [ext_resource type="PackedScene" uid="uid://ipa7kk4n606i" path="res://Scenes/slime.tscn" id="10_qtpdo"]
 [ext_resource type="Script" path="res://Scripts/Slime.cs" id="11_g48w7"]
+[ext_resource type="PackedScene" uid="uid://bdnjtakp06gj" path="res://Scenes/firebolt.tscn" id="12_cmbek"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2atx7"]
 texture = ExtResource("3_xhasp")
@@ -1187,28 +1188,9 @@ sources/1 = SubResource("TileSetAtlasSource_7vnvg")
 [node name="Game" type="Node2D"]
 scale = Vector2(3.6, 3.6)
 
-[node name="Background" type="Node2D" parent="."]
-script = ExtResource("1_lo6r4")
-
-[node name="Parallax1" type="Sprite2D" parent="Background"]
-position = Vector2(-160.278, -90)
-texture = ExtResource("2_xxpyb")
-centered = false
-
-[node name="Parallax2" type="TileMap" parent="Background"]
-position = Vector2(-160, -90)
-tile_set = SubResource("TileSet_imxy3")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 2, 0)
-
-[node name="Parallax3" type="TileMap" parent="Background"]
-position = Vector2(-160, -90)
-tile_set = SubResource("TileSet_imxy3")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 3, 0)
-
 [node name="PlayerCamera" type="Camera2D" parent="."]
 position = Vector2(0, 147.222)
+zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_right = 2300
 limit_bottom = 920
@@ -1217,6 +1199,28 @@ position_smoothing_enabled = true
 position_smoothing_speed = 2.0
 editor_draw_limits = true
 script = ExtResource("5_wl4dl")
+
+[node name="Background" type="Node2D" parent="PlayerCamera"]
+position = Vector2(0, -147.222)
+scale = Vector2(1.25, 1.25)
+script = ExtResource("1_lo6r4")
+
+[node name="Parallax1" type="Sprite2D" parent="PlayerCamera/Background"]
+position = Vector2(-160.278, -90)
+texture = ExtResource("2_xxpyb")
+centered = false
+
+[node name="Parallax2" type="TileMap" parent="PlayerCamera/Background"]
+position = Vector2(-160, -90)
+tile_set = SubResource("TileSet_imxy3")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 2, 0)
+
+[node name="Parallax3" type="TileMap" parent="PlayerCamera/Background"]
+position = Vector2(-160, -90)
+tile_set = SubResource("TileSet_imxy3")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 3, 0)
 
 [node name="Decors" type="Sprite2D" parent="."]
 position = Vector2(210.833, 119.722)
@@ -1256,71 +1260,14 @@ layer_4/y_sort_origin = 0
 layer_4/z_index = 0
 layer_4/tile_data = PackedInt32Array(720896, 393216, 4, 720897, 393216, 4, 720898, 393216, 4, 720899, 393216, 4, 720900, 393216, 4, 720901, 393216, 4, 720902, 393216, 4, 720903, 393216, 4, 720904, 393216, 4, 720905, 393216, 4, 720906, 393216, 4, 720907, 393216, 4, 720908, 393216, 4, 720909, 393216, 4, 720910, 393216, 4, 720911, 393216, 4, 720912, 393216, 4, 720913, 393216, 4, 720914, 393216, 4, 720915, 393216, 4, 720916, 393216, 4, 720917, 393216, 4, 655382, 393216, 4, 655383, 393216, 4, 589848, 393216, 4, 589849, 393216, 4, 589850, 393216, 4, 524315, 393216, 4, 524316, 393216, 4, 524317, 393216, 4, 524318, 393216, 4, 524319, 393216, 4, 524320, 393216, 4, 524321, 393216, 4, 524322, 393216, 4, 720931, 393216, 4, 720932, 393216, 4, 720933, 393216, 4, 720934, 393216, 4, 720935, 393216, 4)
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("9_md3vl")]
-position = Vector2(10.2778, 120.556)
-
 [node name="Slime" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
+position = Vector2(135.278, 87.7778)
 collision_layer = 0
 script = ExtResource("11_g48w7")
 Speed = 180.0
 
-[node name="Slime2" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
+[node name="Firebolt" parent="." instance=ExtResource("12_cmbek")]
+position = Vector2(94.7222, 85.8333)
 
-[node name="Slime3" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime4" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime5" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime6" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime7" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime8" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime9" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime10" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
-
-[node name="Slime11" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(504.722, 6.66667)
-collision_layer = 0
-script = ExtResource("11_g48w7")
-Speed = 180.0
+[node name="PlayerCharacter" parent="." instance=ExtResource("9_md3vl")]
+position = Vector2(93.8889, 95)

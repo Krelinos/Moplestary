@@ -42,6 +42,5 @@ public partial class Background : Node2D
 
 		Parallax2.Position = Parallax2OriginalPosition - Parallax2CycleOffset * ( GlobalPosition / Parallax2CycleLength );
 		Parallax3.Position = Parallax3OriginalPosition - Parallax3CycleOffset * ( GlobalPosition / Parallax3CycleLength );
-		GD.Print( Parallax2.Position );
 	}
 }

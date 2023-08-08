@@ -12,27 +12,41 @@ public partial class MyCharacter : CharacterBody2D
 
 	public AnimatedSprite2D sprite;
 	public CollisionShape2D hitbox;
+	public Node2D WeaponHolder;
 
 	public TileMap tileMap;
+	private PackedScene _sceneFirebolt;
 
 	private bool shouldFaceLeft;
 	private bool isOnLadder;
-
 	private float dropdownHeight;
 
 	public override void _Ready()
 	{
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		hitbox = GetNode<CollisionShape2D>("Hitbox");
+		WeaponHolder = GetNode<Node2D>("WeaponHolder");
 		tileMap = GetNode<TileMap>("/root/Game/Terrain");
+
+		_sceneFirebolt = (PackedScene)ResourceLoader.Load<PackedScene>("res://scenes/firebolt.tscn");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 
+		// Cast firebolt
+		if ( Input.IsActionJustPressed("Shoot") )
+		{
+			var aFirebolt = _sceneFirebolt.Instantiate() as Area2D;
+			GetNode("/root/Game").AddChild( aFirebolt );
+			aFirebolt.GlobalPosition = WeaponHolder.GetNode<Node2D>("Staff/Head").GlobalPosition;
+			if( shouldFaceLeft )
+				aFirebolt.LookAt( aFirebolt.ToGlobal( new Vector2(-1, 0) ) );
+		}
+
 		// Handle ladder climbing
-		if ( Input.IsActionJustPressed("ui_up") )
+		if ( Input.IsActionJustPressed("MoveUp") )
 		{
 
 			Vector2 hitboxCenter = hitbox.GlobalPosition;
@@ -49,7 +63,7 @@ public partial class MyCharacter : CharacterBody2D
 		}
 
 		// Grab ladder below character
-		if ( Input.IsActionJustPressed("ui_down") )
+		if ( Input.IsActionJustPressed("MoveDown") )
 		{
 
 			Vector2 hitboxBottom = GlobalPosition + ( new Vector2(0, 2) );
@@ -67,7 +81,7 @@ public partial class MyCharacter : CharacterBody2D
 
 		if( isOnLadder )
 		{
-			velocity.Y = Input.GetAxis("ui_up", "ui_down") * ClimbSpeed;
+			velocity.Y = Input.GetAxis("MoveUp", "MoveDown") * ClimbSpeed;
 
 			Vector2 hitboxBottom = GlobalPosition;
 			Vector2 hitboxCenter = hitbox.GlobalPosition;
@@ -84,11 +98,11 @@ public partial class MyCharacter : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 
 		// Handle Jump.
-		if ( Input.IsActionPressed("ui_accept") )
+		if ( Input.IsActionPressed("Jump") )
 		{
 			if( IsOnFloor() )
 			{
-				if( Input.IsActionPressed("ui_down") )	// Drop down
+				if( Input.IsActionPressed("MoveDown") )	// Drop down
 				{
 					// Check if dropdown-able
 					Vector2 hitboxBottom = GlobalPosition + ( new Vector2(0, 8) );
@@ -118,7 +132,7 @@ public partial class MyCharacter : CharacterBody2D
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
-		Vector2 direction = new Vector2( Input.GetAxis("ui_left", "ui_right"), 0f ); //, "ui_up", "ui_down");
+		Vector2 direction = new Vector2( Input.GetAxis("MoveLeft", "MoveRight"), 0f ); //, "ui_up", "ui_down");
 		if (direction != Vector2.Zero && !isOnLadder )	// At least one movement key is pressed
 		{
 			velocity.X = direction.X * Speed;
@@ -145,6 +159,9 @@ public partial class MyCharacter : CharacterBody2D
 		}
 
 		sprite.FlipH = shouldFaceLeft;
+		int scale = shouldFaceLeft ? -1 : 1;
+
+		WeaponHolder.Scale = new Vector2( scale, 1 );
 
 		Velocity = velocity;
 		MoveAndSlide();
