@@ -90,7 +90,7 @@ animations = [{
 collision_layer = 2
 script = ExtResource("1_rjfor")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
 scale = Vector2(0.8, 1)
 shape = SubResource("RectangleShape2D_v38yp")

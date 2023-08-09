@@ -9,21 +9,21 @@ public abstract partial class Mob : CharacterBody2D
 	protected float GRAVITY = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	protected AnimatedSprite2D Sprite;
-	protected CollisionShape2D Hitbox;
+	protected CollisionShape2D CollisionShape;
     protected StateMachine StateMachine;
 
     // The Terrain TileMap of the region this Mob is on.
 	protected TileMap _Terrain;
 
     // The mob's position on TILE_MAP's grid.
-	private Vector2I GridPosition
+	protected Vector2I GridPosition
 	{
 		get { return _Terrain.LocalToMap( _Terrain.ToLocal( GlobalPosition ) ); }
 		// set {  }
 	}
 
     // -1 | Mob is moving left. 0 | Mob is still in the x-axis. 1 | Mob is moving right.
-	private int movementDirection;
+	protected int movementDirection;
 
     // When dropping down a platform, the Mob ignores _Terrain collision.
     // Once the Mob's Global Y-Axis becomes greater than this number,
@@ -36,7 +36,7 @@ public abstract partial class Mob : CharacterBody2D
 	public override void _Ready()
 	{
 		Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
-		Hitbox = GetNode<CollisionShape2D>("Hitbox");
+		CollisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
 		_Terrain = GetNode<TileMap>("/root/Game/Terrain");
 
         movementDirection = 0;
@@ -51,9 +51,9 @@ public abstract partial class Mob : CharacterBody2D
 			velocity.Y += GRAVITY * (float)delta;
         
         // Check dropdown threshold.
-        if ( Hitbox.Disabled == true )
+        if ( CollisionShape.Disabled == true )
 			if ( GlobalPosition.Y > dropdownThreshold )
-				Hitbox.Disabled = false;
+				CollisionShape.Disabled = false;
         
         Move();
 
@@ -119,7 +119,7 @@ public abstract partial class Mob : CharacterBody2D
         if( tileData == null )
         {
             velocity.Y = -100;
-            Hitbox.Disabled = true;
+            CollisionShape.Disabled = true;
             dropdownThreshold = GlobalPosition.Y + 8;
         }
     }

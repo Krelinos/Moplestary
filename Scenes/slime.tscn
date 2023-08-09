@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://ipa7kk4n606i"]
 
-[ext_resource type="Script" path="res://Scripts/Slime.cs" id="1_kfp0w"]
+[ext_resource type="Script" path="res://Scripts/Mobs/WanderingMob.cs" id="1_idc1i"]
 [ext_resource type="Texture2D" uid="uid://tupbw44i6u84" path="res://Assets/Characters/Mobs/Slime Sprite Sheet.png" id="2_01mos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twqwq"]
@@ -218,18 +218,19 @@ animations = [{
 
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 4
-script = ExtResource("1_kfp0w")
+script = ExtResource("1_idc1i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.00002)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_twqwq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_rs3pu")
-animation = &"jump"
-frame_progress = 0.048242
+animation = &"idle"
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -8)
 collision_layer = 4
 collision_mask = 80
 
@@ -237,5 +238,7 @@ collision_mask = 80
 position = Vector2(0, 2.00002)
 shape = SubResource("RectangleShape2D_twqwq")
 
-[node name="HitStunTimer" type="Timer" parent="."]
-one_shot = true
+[node name="WanderTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="WanderTimer" to="." method="_OnWanderTimerTimeout"]
