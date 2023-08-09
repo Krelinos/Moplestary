@@ -38,6 +38,9 @@ partial class WanderingMob : Mob
                 Jump();
             else
                 movementDirection *= -1;
+        
+        if ( isJumpEnabled && ShouldMobJump() )
+            Jump();
     }
 
     protected bool IsAboutToFallOffLedge()  // Pure function; does not edit data
@@ -50,6 +53,26 @@ partial class WanderingMob : Mob
             return true;
         else
             return false;
+    }
+
+    protected bool ShouldMobJump()  // Pure function
+    {
+        foreach( Vector2I offset in PotentialJumpCoords )
+		{
+			// Get the tile below the target tile position.
+			// offset is multiplied in order to mirror the coords about the y-axis when facing left.
+			Vector2I landingTile = GridPosition + new Vector2I(0, 1)
+                    + ( offset * ( new Vector2I( movementDirection, 1 ) ) );
+
+			if( _Terrain.GetCellSourceId( 1, landingTile ) == -1 )			// 1 should be the main terrain layer (this is an assumption).
+			{																// A return of -1 means the landing tile does not exist.
+				;	// Nothing
+			}
+			else
+				return true;
+		}
+
+		return false;
     }
 
     public void _OnWanderTimerTimeout()
