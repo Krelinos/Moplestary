@@ -51,6 +51,8 @@ public partial class Projectile : Area2D
 
 		Sprite.Play("hit");
 		Sprite.AnimationFinished += HitEffectFinished;
+
+		Rotation = ( GD.Randi() % 4 ) * 90;
 	}
 
 	private void HitEffectFinished()
