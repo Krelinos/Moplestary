@@ -205,4 +205,9 @@ public partial class Slime : CharacterBody2D
 			return true;
 		return false;
 	}
+
+	public void TakeDamage( int amount, Node2D attacker, Node2D inflicter )
+	{
+		GD.Print( Name + " took " + amount + " damage from " + attacker.Name + " using a " + inflicter.Name );
+	}
 }

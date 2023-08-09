@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://nv6bnvfqit5y"]
+[gd_scene load_steps=19 format=3 uid="uid://nv6bnvfqit5y"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_6negy"]
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="1_lo6r4"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bk7ejp3f5p8lr" path="res://Assets/LegacyAdventureForest.png" id="8_g3rgy"]
 [ext_resource type="PackedScene" uid="uid://g1rov17l6ftn" path="res://Scenes/player_character.tscn" id="9_md3vl"]
 [ext_resource type="PackedScene" uid="uid://ipa7kk4n606i" path="res://Scenes/slime.tscn" id="10_qtpdo"]
-[ext_resource type="Script" path="res://Scripts/Slime.cs" id="11_g48w7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2atx7"]
 texture = ExtResource("3_xhasp")
@@ -1262,8 +1261,6 @@ layer_4/tile_data = PackedInt32Array(720896, 393216, 4, 720897, 393216, 4, 72089
 
 [node name="Slime" parent="." instance=ExtResource("10_qtpdo")]
 position = Vector2(135.278, 87.7778)
-script = ExtResource("11_g48w7")
-Speed = 180.0
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("9_md3vl")]
 position = Vector2(93.8889, 95)

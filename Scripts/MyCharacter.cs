@@ -44,11 +44,17 @@ public partial class MyCharacter : CharacterBody2D
 			Node2D closestMob = null;
 			float closestDist = 512;
 
+			// Spawn firebolt instance and set position in world
+			
+			var aFirebolt = _sceneFirebolt.Instantiate() as Area2D;
+			GetNode("/root/Game").AddChild( aFirebolt );
+			aFirebolt.GlobalPosition = WeaponHolder.GetNode<Node2D>("Staff/Head").GlobalPosition;
+
+			// Detect if valid target exists and aim towards it
 			Godot.Collections.Array<Node2D> targetableMobs = ProjectileTargetingArea.GetOverlappingBodies();
 			foreach( Node2D aMob in targetableMobs )
 			{
 				float mobDist = (aMob.GlobalPosition - GlobalPosition).Length();
-				GD.Print( aMob.Name );
 				if ( mobDist < closestDist )
 				{
 					closestMob = aMob;
@@ -56,15 +62,11 @@ public partial class MyCharacter : CharacterBody2D
 				}
 			}
 
-			var aFirebolt = _sceneFirebolt.Instantiate() as Area2D;
-			GetNode("/root/Game").AddChild( aFirebolt );
-			aFirebolt.GlobalPosition = WeaponHolder.GetNode<Node2D>("Staff/Head").GlobalPosition;
-			
 			if ( closestMob != null )
 			{
 				aFirebolt.LookAt( closestMob.GlobalPosition );
 			}
-			else
+			else	// No target, just aim forward
 				aFirebolt.LookAt( WeaponHolder.ToGlobal( Vector2.Right*256 ) );
 
 		}

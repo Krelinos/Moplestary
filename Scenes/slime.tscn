@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://ipa7kk4n606i"]
+[gd_scene load_steps=31 format=3 uid="uid://ipa7kk4n606i"]
 
+[ext_resource type="Script" path="res://Scripts/Slime.cs" id="1_kfp0w"]
 [ext_resource type="Texture2D" uid="uid://tupbw44i6u84" path="res://Assets/Characters/Mobs/Slime Sprite Sheet.png" id="2_01mos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_twqwq"]
+size = Vector2(12, 12)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6nbwp"]
 atlas = ExtResource("2_01mos")
@@ -60,9 +62,21 @@ region = Rect2(72, 16, 16, 16)
 atlas = ExtResource("2_01mos")
 region = Rect2(104, 16, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6wtvf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6i47"]
 atlas = ExtResource("2_01mos")
-region = Rect2(136, 48, 16, 16)
+region = Rect2(64, 40, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rd6y"]
+atlas = ExtResource("2_01mos")
+region = Rect2(96, 40, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u3ww1"]
+atlas = ExtResource("2_01mos")
+region = Rect2(128, 40, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cyuv3"]
+atlas = ExtResource("2_01mos")
+region = Rect2(96, 40, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tmf3j"]
 atlas = ExtResource("2_01mos")
@@ -157,7 +171,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6wtvf")
+"texture": SubResource("AtlasTexture_n6i47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rd6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u3ww1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cyuv3")
 }],
 "loop": true,
 "name": &"jump",
@@ -195,13 +218,24 @@ animations = [{
 
 [node name="Slime" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+script = ExtResource("1_kfp0w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.00002)
-scale = Vector2(0.6, 0.6)
 shape = SubResource("RectangleShape2D_twqwq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rs3pu")
-animation = &"moving"
+animation = &"jump"
+frame_progress = 0.048242
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 80
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, 2.00002)
+shape = SubResource("RectangleShape2D_twqwq")
+
+[node name="HitStunTimer" type="Timer" parent="."]
+one_shot = true

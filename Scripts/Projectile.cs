@@ -52,6 +52,9 @@ public partial class Projectile : Area2D
 		Sprite.Play("hit");
 		Sprite.AnimationFinished += HitEffectFinished;
 
+		Slime victim = body as Slime;
+		victim.TakeDamage( 10, GetNode<Node2D>("/root/Game/PlayerCharacter"), this );
+
 		Rotation = ( GD.Randi() % 4 ) * 90;
 	}
 
