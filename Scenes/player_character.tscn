@@ -115,13 +115,12 @@ region_filter_clip_enabled = true
 [node name="Head" type="Node2D" parent="WeaponHolder/Staff"]
 position = Vector2(0, -11)
 
-[node name="ProjectileTargetingArea" type="Area2D" parent="."]
-position = Vector2(0, -8)
+[node name="ProjectileTargetingArea" type="Area2D" parent="WeaponHolder"]
+position = Vector2(0, -2)
 collision_layer = 0
 collision_mask = 4
-input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="ProjectileTargetingArea"]
-polygon = PackedVector2Array(0, -16, 0, 16, 192, 48, 192, -48)
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponHolder/ProjectileTargetingArea"]
+polygon = PackedVector2Array(0, -8, 0, 8, 192, 32, 192, -32)
 
-[connection signal="area_entered" from="ProjectileTargetingArea" to="." method="_OnProjectileTargetAreaAreaEntered"]
+[connection signal="area_entered" from="WeaponHolder/ProjectileTargetingArea" to="." method="_OnProjectileTargetAreaAreaEntered"]

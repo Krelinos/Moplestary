@@ -13,6 +13,7 @@ public partial class MyCharacter : CharacterBody2D
 	public AnimatedSprite2D sprite;
 	public CollisionShape2D hitbox;
 	public Node2D WeaponHolder;
+	private Area2D ProjectileTargetingArea;
 
 	public TileMap tileMap;
 	private PackedScene _sceneFirebolt;
@@ -26,6 +27,8 @@ public partial class MyCharacter : CharacterBody2D
 		sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		hitbox = GetNode<CollisionShape2D>("Hitbox");
 		WeaponHolder = GetNode<Node2D>("WeaponHolder");
+		ProjectileTargetingArea = GetNode<Area2D>("WeaponHolder/ProjectileTargetingArea");
+
 		tileMap = GetNode<TileMap>("/root/Game/Terrain");
 
 		_sceneFirebolt = (PackedScene)ResourceLoader.Load<PackedScene>("res://scenes/firebolt.tscn");
@@ -34,15 +37,36 @@ public partial class MyCharacter : CharacterBody2D
 	public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
-
+		
 		// Cast firebolt
 		if ( Input.IsActionJustPressed("Shoot") )
 		{
+			Node2D closestMob = null;
+			float closestDist = 512;
+
+			Godot.Collections.Array<Node2D> targetableMobs = ProjectileTargetingArea.GetOverlappingBodies();
+			foreach( Node2D aMob in targetableMobs )
+			{
+				float mobDist = (aMob.GlobalPosition - GlobalPosition).Length();
+				GD.Print( aMob.Name );
+				if ( mobDist < closestDist )
+				{
+					closestMob = aMob;
+					closestDist = mobDist;
+				}
+			}
+
 			var aFirebolt = _sceneFirebolt.Instantiate() as Area2D;
 			GetNode("/root/Game").AddChild( aFirebolt );
 			aFirebolt.GlobalPosition = WeaponHolder.GetNode<Node2D>("Staff/Head").GlobalPosition;
-			if( shouldFaceLeft )
-				aFirebolt.LookAt( aFirebolt.ToGlobal( new Vector2(-1, 0) ) );
+			
+			if ( closestMob != null )
+			{
+				aFirebolt.LookAt( closestMob.GlobalPosition );
+			}
+			else
+				aFirebolt.LookAt( WeaponHolder.ToGlobal( Vector2.Right*256 ) );
+
 		}
 
 		// Handle ladder climbing
@@ -169,5 +193,6 @@ public partial class MyCharacter : CharacterBody2D
 
 	public void _OnProjectileTargetAreaAreaEntered( Area2D area )
 	{
+		GD.Print("Yeet");
 	}
 }
