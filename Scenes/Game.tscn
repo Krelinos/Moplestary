@@ -1264,3 +1264,4 @@ position = Vector2(135.278, 87.7778)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("9_md3vl")]
 position = Vector2(93.8889, 95)
+MoveSpeed = 200.0

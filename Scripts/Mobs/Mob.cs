@@ -46,8 +46,6 @@ public abstract partial class Mob : CharacterBody2D
 	{
 		velocity = Velocity;
 
-        Move();
-
         // Add the gravity.
 		if ( !IsOnFloor() )
 			velocity.Y += GRAVITY * (float)delta;
@@ -57,41 +55,56 @@ public abstract partial class Mob : CharacterBody2D
 			if ( GlobalPosition.Y > dropdownThreshold )
 				Hitbox.Disabled = false;
         
-        // Update sprite stuff.
-        Sprite.FlipH = facingLeft;
+        Move();
 
-        if ( !IsOnFloor() )
-            Sprite.Play("jump");
-        else
-            if ( velocity.X > 0f )
-                Sprite.Play("moving");
-            else
-                Sprite.Play("idle");
+        // Update sprite stuff.
+        SpriteStuff();
 
         Velocity = velocity;
         MoveAndSlide();
     }
 
-    protected void Move()
+    protected virtual void Move()
     {
         if( movementDirection == 0 )
         {
             // For mobs, conserve X-axis velocity until on ground.
             // For players, automatically try to reach 0 velocity in X-axis when airbone.
-            if( IsOnFloor() )
+            if( IsOnFloor() )   // Keep for mobs, remove for players
 			    velocity.X = Mathf.MoveToward(Velocity.X, 0, MoveSpeed);
         }
         else
             velocity.X = movementDirection * MoveSpeed;
     }
 
-    protected void Jump()
+    protected virtual void SpriteStuff()
+    {
+        // facingLeft should also be used for anything else that needs to be mirrored
+        // such as weapons for player characters.
+        if ( velocity.X < 0 )
+            facingLeft = true;
+        else
+            if ( velocity.X > 0 )
+                facingLeft = false;
+
+        Sprite.FlipH = facingLeft;
+
+        if ( !IsOnFloor() )
+            Sprite.Play("jump");
+        else
+            if ( velocity.X != 0f )
+                Sprite.Play("moving");
+            else
+                Sprite.Play("idle");
+    }
+
+    protected virtual void Jump()
     {
         if ( IsOnFloor() )
 			velocity.Y = JumpPower;
     }
 
-    protected void DropDown()
+    protected virtual void DropDown()
     {
         // Check if DropDown-able
         Vector2 hitboxBottom = GlobalPosition + ( new Vector2(0, 8) );
@@ -105,9 +118,9 @@ public abstract partial class Mob : CharacterBody2D
         TileData tileData = _Terrain.GetCellTileData( 4, tilePos );
         if( tileData == null )
         {
-            velocity.Y = -20;
+            velocity.Y = -100;
             Hitbox.Disabled = true;
-            dropdownThreshold = GlobalPosition.Y + 4;
+            dropdownThreshold = GlobalPosition.Y + 8;
         }
     }
 
