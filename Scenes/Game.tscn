@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://nv6bnvfqit5y"]
+[gd_scene load_steps=21 format=3 uid="uid://nv6bnvfqit5y"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_6negy"]
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="1_lo6r4"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://g1rov17l6ftn" path="res://Scenes/player_character.tscn" id="9_md3vl"]
 [ext_resource type="PackedScene" uid="uid://ipa7kk4n606i" path="res://Scenes/slime.tscn" id="10_qtpdo"]
 [ext_resource type="PackedScene" uid="uid://c74uwacnmg4oc" path="res://Scenes/ui_skills.tscn" id="12_q0lkq"]
+[ext_resource type="PackedScene" uid="uid://b6ci5r1m4pfg3" path="res://Scenes/ui_inventory.tscn" id="13_ei3uk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2atx7"]
 texture = ExtResource("3_xhasp")
@@ -1190,7 +1191,6 @@ scale = Vector2(3.6, 3.6)
 script = ExtResource("1_6negy")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_right = 2300
 limit_bottom = 920
@@ -1201,7 +1201,7 @@ editor_draw_limits = true
 script = ExtResource("5_wl4dl")
 
 [node name="Background" type="Node2D" parent="PlayerCamera"]
-scale = Vector2(1.25, 1.25)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_lo6r4")
 
 [node name="Parallax1" type="Sprite2D" parent="PlayerCamera/Background"]
@@ -1213,13 +1213,13 @@ centered = false
 position = Vector2(-160, -90)
 tile_set = SubResource("TileSet_imxy3")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 2, 0)
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 1, 2, 0, 65535, 2, 0)
 
 [node name="Parallax3" type="TileMap" parent="PlayerCamera/Background"]
 position = Vector2(-160, -90)
 tile_set = SubResource("TileSet_imxy3")
 format = 2
-layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 3, 0)
+layer_0/tile_data = PackedInt32Array(0, 3, 0, 1, 3, 0, 65535, 3, 0)
 
 [node name="Decors" type="Sprite2D" parent="."]
 position = Vector2(210.833, 119.722)
@@ -1268,8 +1268,22 @@ MoveSpeed = 180.0
 position = Vector2(456.667, 126.111)
 MoveSpeed = 220.0
 
-[node name="UISkills" parent="." instance=ExtResource("12_q0lkq")]
-offset_left = 210.833
-offset_top = -68.6111
-offset_right = 610.833
-offset_bottom = 251.389
+[node name="UI" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="UISkills" parent="UI" instance=ExtResource("12_q0lkq")]
+offset_left = 351.111
+offset_top = 137.222
+offset_right = 863.111
+offset_bottom = 477.222
+
+[node name="UI2" type="Node2D" parent="."]
+scale = Vector2(0.5, 0.5)
+
+[node name="UIInventory" parent="UI2" instance=ExtResource("13_ei3uk")]
+offset_left = 94.4445
+offset_top = 168.333
+offset_right = 94.4445
+offset_bottom = 168.333
+size_flags_horizontal = 0
+size_flags_vertical = 0
