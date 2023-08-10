@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://nv6bnvfqit5y"]
+[gd_scene load_steps=20 format=3 uid="uid://nv6bnvfqit5y"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_6negy"]
 [ext_resource type="Script" path="res://Scripts/Background.cs" id="1_lo6r4"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bk7ejp3f5p8lr" path="res://Assets/LegacyAdventureForest.png" id="8_g3rgy"]
 [ext_resource type="PackedScene" uid="uid://g1rov17l6ftn" path="res://Scenes/player_character.tscn" id="9_md3vl"]
 [ext_resource type="PackedScene" uid="uid://ipa7kk4n606i" path="res://Scenes/slime.tscn" id="10_qtpdo"]
+[ext_resource type="PackedScene" uid="uid://c74uwacnmg4oc" path="res://Scenes/ui_skills.tscn" id="12_q0lkq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2atx7"]
 texture = ExtResource("3_xhasp")
@@ -1200,7 +1201,6 @@ editor_draw_limits = true
 script = ExtResource("5_wl4dl")
 
 [node name="Background" type="Node2D" parent="PlayerCamera"]
-position = Vector2(0, -147.222)
 scale = Vector2(1.25, 1.25)
 script = ExtResource("1_lo6r4")
 
@@ -1260,10 +1260,16 @@ layer_4/z_index = 0
 layer_4/tile_data = PackedInt32Array(720896, 393216, 4, 720897, 393216, 4, 720898, 393216, 4, 720899, 393216, 4, 720900, 393216, 4, 720901, 393216, 4, 720902, 393216, 4, 720903, 393216, 4, 720904, 393216, 4, 720905, 393216, 4, 720906, 393216, 4, 720907, 393216, 4, 720908, 393216, 4, 720909, 393216, 4, 720910, 393216, 4, 720911, 393216, 4, 720912, 393216, 4, 720913, 393216, 4, 720914, 393216, 4, 720915, 393216, 4, 720916, 393216, 4, 720917, 393216, 4, 655382, 393216, 4, 655383, 393216, 4, 589848, 393216, 4, 589849, 393216, 4, 589850, 393216, 4, 524315, 393216, 4, 524316, 393216, 4, 524317, 393216, 4, 524318, 393216, 4, 524319, 393216, 4, 524320, 393216, 4, 524321, 393216, 4, 524322, 393216, 4, 720931, 393216, 4, 720932, 393216, 4, 720933, 393216, 4, 720934, 393216, 4, 720935, 393216, 4)
 
 [node name="Slime" parent="." instance=ExtResource("10_qtpdo")]
-position = Vector2(492.222, 126.111)
+position = Vector2(492.222, 125.556)
 JumpChance = 100
 MoveSpeed = 180.0
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("9_md3vl")]
 position = Vector2(456.667, 126.111)
 MoveSpeed = 220.0
+
+[node name="UISkills" parent="." instance=ExtResource("12_q0lkq")]
+offset_left = 210.833
+offset_top = -68.6111
+offset_right = 610.833
+offset_bottom = 251.389
