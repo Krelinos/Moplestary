@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://c74uwacnmg4oc"]
+[gd_scene load_steps=15 format=3 uid="uid://c74uwacnmg4oc"]
 
 [ext_resource type="Texture2D" uid="uid://r6ewrgaugcks" path="res://Assets/UI/UI books & more.png" id="1_10w3n"]
 [ext_resource type="LabelSettings" uid="uid://dvbprvuyh5cj2" path="res://Assets/UI/Fonts/label_settings_skills.tres" id="2_boeq5"]
+[ext_resource type="FontFile" uid="uid://dhue8oc0qv0rr" path="res://Assets/UI/Fonts/quaver.ttf" id="2_kkwcb"]
 [ext_resource type="Texture2D" uid="uid://bfjy482660t2a" path="res://Assets/UI/Weapons.png" id="3_4srs2"]
 [ext_resource type="Theme" uid="uid://cubthjbkb7n72" path="res://Assets/UI/theme_moplestary.tres" id="3_fjluk"]
+[ext_resource type="Texture2D" uid="uid://bxrnex6aohnp" path="res://Assets/UI/your_world_ui_icons_and_buttons_free_preview.png" id="6_oa3gx"]
+[ext_resource type="FontFile" uid="uid://c8gsc3fqedvga" path="res://Assets/UI/Fonts/m5x7.ttf" id="7_wbpdn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6h68"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -11,13 +14,45 @@ corner_detail = 1
 shadow_size = 2
 anti_aliasing = false
 
+[sub_resource type="LabelSettings" id="LabelSettings_ye5ml"]
+line_spacing = 0.0
+font = ExtResource("2_kkwcb")
+font_color = Color(0.929412, 0.870588, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0psqn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 2
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_yx86f"]
+font = ExtResource("7_wbpdn")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_loqe0"]
 bg_color = Color(0.0627451, 0.0627451, 0.0627451, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_evr61"]
 bg_color = Color(0.168627, 0.168627, 0.168627, 1)
 
-[node name="Control" type="Control"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rx8pj"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 1)
+
+[node name="UISkills" type="Control"]
 custom_minimum_size = Vector2(512, 340)
 layout_mode = 3
 anchors_preset = 0
@@ -61,10 +96,14 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer"]
+[node name="UITitle" type="MarginContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UITitle"]
 layout_mode = 2
 text = "Skills"
-label_settings = ExtResource("2_boeq5")
+label_settings = SubResource("LabelSettings_ye5ml")
 horizontal_alignment = 1
 
 [node name="PanelContainer" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer"]
@@ -92,18 +131,25 @@ theme_override_constants/margin_bottom = 12
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="AllSkills" type="HBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
+[node name="SkillsList" type="HBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Warrior" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="Warrior" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Warrior"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior"]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Warrior/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -114,7 +160,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Control" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Warrior/VBoxContainer/NinePatchRect"]
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/PanelContainer/VBoxContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -124,12 +170,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Warrior/VBoxContainer/NinePatchRect/Control"]
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/PanelContainer/VBoxContainer/NinePatchRect/Icon"]
 texture = ExtResource("3_4srs2")
 region_enabled = true
-region_rect = Rect2(17, 1, 14, 14)
+region_rect = Rect2(16, 0, 16, 16)
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Warrior/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 text = "Warrior
@@ -138,18 +184,7 @@ label_settings = ExtResource("2_boeq5")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
-layout_mode = 2
-theme = ExtResource("3_fjluk")
-
-[node name="Pirate" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Pirate"]
-layout_mode = 2
-
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Pirate/VBoxContainer"]
+[node name="NinePatchRect2" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -160,7 +195,8 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Control" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Pirate/VBoxContainer/NinePatchRect"]
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect2"]
+modulate = Color(1, 0.658824, 0.658824, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -170,12 +206,204 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Pirate/VBoxContainer/NinePatchRect/Control"]
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect2/Icon"]
+texture = ExtResource("6_oa3gx")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="SelectionHalo" type="Panel" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0psqn")
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect3/Icon"]
 texture = ExtResource("3_4srs2")
 region_enabled = true
-region_rect = Rect2(17, 1, 14, 14)
+region_rect = Rect2(48, 112, 16, 16)
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Pirate/VBoxContainer"]
+[node name="Rank" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "D"
+label_settings = SubResource("LabelSettings_yx86f")
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="NinePatchRect4" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect4"]
+modulate = Color(1, 0.658824, 0.658824, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect4/Icon"]
+texture = ExtResource("6_oa3gx")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="NinePatchRect5" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect5"]
+modulate = Color(1, 0.658824, 0.658824, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect5/Icon"]
+texture = ExtResource("6_oa3gx")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="NinePatchRect6" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect6"]
+modulate = Color(1, 0.658824, 0.658824, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect6/Icon"]
+texture = ExtResource("6_oa3gx")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="NinePatchRect7" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect7"]
+modulate = Color(1, 0.658824, 0.658824, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Warrior/VBoxContainer/NinePatchRect7/Icon"]
+texture = ExtResource("6_oa3gx")
+region_enabled = true
+region_rect = Rect2(112, 80, 16, 16)
+
+[node name="HSeparator" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
+layout_mode = 2
+theme = ExtResource("3_fjluk")
+
+[node name="Pirate" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Pirate"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Pirate/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_10w3n")
+region_rect = Rect2(352, 272, 32, 16)
+patch_margin_left = 3
+patch_margin_top = 3
+patch_margin_right = 3
+patch_margin_bottom = 3
+
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Pirate/VBoxContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Pirate/VBoxContainer/NinePatchRect/Icon"]
+texture = ExtResource("3_4srs2")
+region_enabled = true
+region_rect = Rect2(64, 256, 16, 16)
+
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Pirate/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 text = "Pirate"
@@ -183,18 +411,18 @@ label_settings = ExtResource("2_boeq5")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator2" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="HSeparator2" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 
-[node name="Ranger" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="Ranger" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Ranger"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Ranger"]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Ranger/VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Ranger/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -205,7 +433,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Control" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Ranger/VBoxContainer/NinePatchRect"]
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Ranger/VBoxContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -215,12 +443,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Ranger/VBoxContainer/NinePatchRect/Control"]
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Ranger/VBoxContainer/NinePatchRect/Icon"]
 texture = ExtResource("3_4srs2")
 region_enabled = true
-region_rect = Rect2(17, 1, 14, 14)
+region_rect = Rect2(64, 336, 16, 16)
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Ranger/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Ranger/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 text = "Ranger"
@@ -228,18 +456,18 @@ label_settings = ExtResource("2_boeq5")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator3" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="HSeparator3" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 
-[node name="Thief" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="Thief" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Thief"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Thief"]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Thief/VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Thief/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -250,7 +478,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Control" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Thief/VBoxContainer/NinePatchRect"]
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Thief/VBoxContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -260,12 +488,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Thief/VBoxContainer/NinePatchRect/Control"]
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Thief/VBoxContainer/NinePatchRect/Icon"]
 texture = ExtResource("3_4srs2")
 region_enabled = true
-region_rect = Rect2(17, 1, 14, 14)
+region_rect = Rect2(14, 49, 16, 16)
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Thief/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Thief/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 text = "Thief"
@@ -273,18 +501,18 @@ label_settings = ExtResource("2_boeq5")
 horizontal_alignment = 1
 uppercase = true
 
-[node name="HSeparator4" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="HSeparator4" type="VSeparator" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 
-[node name="Mage" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills"]
+[node name="Mage" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList"]
 custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Mage"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Mage"]
 layout_mode = 2
 
-[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Mage/VBoxContainer"]
+[node name="NinePatchRect" type="NinePatchRect" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Mage/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -295,7 +523,7 @@ patch_margin_top = 3
 patch_margin_right = 3
 patch_margin_bottom = 3
 
-[node name="Control" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Mage/VBoxContainer/NinePatchRect"]
+[node name="Icon" type="Control" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Mage/VBoxContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -305,12 +533,12 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Mage/VBoxContainer/NinePatchRect/Control"]
+[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Mage/VBoxContainer/NinePatchRect/Icon"]
 texture = ExtResource("3_4srs2")
 region_enabled = true
-region_rect = Rect2(17, 1, 14, 14)
+region_rect = Rect2(32, 288, 16, 16)
 
-[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/AllSkills/Mage/VBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillsList/Mage/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
 text = "Mage"
@@ -398,11 +626,11 @@ layout_mode = 2
 size_flags_horizontal = 0
 
 [node name="Icon" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillDetails/PanelContainer/MarginContainer/VBoxContainer/PointAllocation/HBoxContainer/RemovePoint"]
-position = Vector2(0, 6)
+position = Vector2(0, 5)
 texture = ExtResource("1_10w3n")
 centered = false
 region_enabled = true
-region_rect = Rect2(449, 309, 14, 4)
+region_rect = Rect2(449, 341, 14, 7)
 
 [node name="Ranks" type="MarginContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillDetails/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -449,6 +677,7 @@ vertical_alignment = 1
 [node name="D" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillDetails/PanelContainer/MarginContainer/VBoxContainer/Ranks/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_fjluk")
+theme_override_styles/panel = SubResource("StyleBoxFlat_rx8pj")
 
 [node name="Label" type="Label" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/SkillDetails/PanelContainer/MarginContainer/VBoxContainer/Ranks/VBoxContainer/D"]
 layout_mode = 2
