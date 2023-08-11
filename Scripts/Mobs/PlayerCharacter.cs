@@ -22,7 +22,7 @@ partial class PlayerCharacter : Mob
     {
         base._PhysicsProcess(delta);
 
-        WeaponHolder.Scale =  facingLeft ? new Vector2( -1, 1 ) : Vector2.One;
+        // WeaponHolder.Scale =  facingLeft ? new Vector2( -1, 1 ) : Vector2.One;
     }
 
     protected override void Move()

@@ -100,26 +100,12 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_7r81f")
 animation = &"moving"
 
-[node name="WeaponHolder" type="Node2D" parent="."]
-position = Vector2(0, -6)
-
-[node name="Staff" type="Sprite2D" parent="WeaponHolder"]
-position = Vector2(12, 3)
-rotation = 0.445059
-texture = ExtResource("2_ugyf0")
-region_enabled = true
-region_rect = Rect2(324, 144, 8, 32)
-region_filter_clip_enabled = true
-
-[node name="Head" type="Node2D" parent="WeaponHolder/Staff"]
-position = Vector2(0, -11)
-
-[node name="RangedAttackTargetingArea" type="Area2D" parent="WeaponHolder"]
-position = Vector2(0, -2)
+[node name="RangedAttackTargetingArea" type="Area2D" parent="."]
+position = Vector2(0, -8)
 collision_layer = 0
 collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponHolder/RangedAttackTargetingArea"]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RangedAttackTargetingArea"]
 polygon = PackedVector2Array(0, -8, 0, 8, 192, 32, 192, -32)
 
-[connection signal="area_entered" from="WeaponHolder/RangedAttackTargetingArea" to="." method="_OnProjectileTargetAreaAreaEntered"]
+[connection signal="area_entered" from="RangedAttackTargetingArea" to="." method="_OnProjectileTargetAreaAreaEntered"]

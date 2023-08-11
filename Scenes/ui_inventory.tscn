@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6ci5r1m4pfg3"]
+[gd_scene load_steps=11 format=3 uid="uid://b6ci5r1m4pfg3"]
 
 [ext_resource type="Texture2D" uid="uid://r6ewrgaugcks" path="res://Assets/UI/UI books & more.png" id="1_fdrlq"]
+[ext_resource type="Script" path="res://Scripts/UI/ui_inventory.cs" id="1_kn77u"]
 [ext_resource type="FontFile" uid="uid://dhue8oc0qv0rr" path="res://Assets/UI/Fonts/quaver.ttf" id="2_uly6q"]
 [ext_resource type="Texture2D" uid="uid://b1mpy453wg0ot" path="res://Assets/UI/UI inventory.png" id="3_uvctp"]
 [ext_resource type="Texture2D" uid="uid://bfjy482660t2a" path="res://Assets/UI/Weapons.png" id="4_if3v4"]
@@ -538,33 +539,39 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="InventoryTiles" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer"]
+[node name="InventoryContent" type="PanelContainer" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_kxir4")
+script = ExtResource("1_kn77u")
 
-[node name="TileMap" type="TileMap" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryTiles"]
+[node name="EquipTiles" type="TileMap" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryContent"]
+position = Vector2(13.5, 0)
 scale = Vector2(1.5, 1.5)
 tile_set = SubResource("TileSet_s78nx")
 format = 2
-layer_0/tile_data = PackedInt32Array(2, 1703936, 7, 65538, 1703936, 7, 262144, 1769472, 6, 327680, 1769472, 6, 393216, 1769472, 6, 458752, 1769472, 6, 262145, 1769472, 6, 327681, 1769472, 6, 393217, 1769472, 6, 458753, 1769472, 6, 262146, 1769472, 6, 327682, 1769472, 6, 393218, 1769472, 6, 458754, 1769472, 6, 262147, 1769472, 6, 327683, 1769472, 6, 393219, 1769472, 6, 458755, 1769472, 6, 262148, 1769472, 6, 327684, 1769472, 6, 393220, 1769472, 6, 458756, 1769472, 6, 262149, 1769472, 6, 327685, 1769472, 6, 393221, 1769472, 6, 458757, 1769472, 6, 262150, 1769472, 6, 327686, 1769472, 6, 393222, 1769472, 6, 458758, 1769472, 6, 262151, 1769472, 6, 327687, 1769472, 6, 393223, 1769472, 6, 458759, 1769472, 6, 3, 1703936, 7, 65539, 1703936, 7, 1, 1703936, 7, 65537, 1703936, 7, 131074, 1703936, 7, 524288, 1769472, 6, 524289, 1769472, 6, 524290, 1769472, 6, 524291, 1769472, 6, 524292, 1769472, 6, 524293, 1769472, 6, 524294, 1769472, 6, 524295, 1769472, 6)
+layer_0/tile_data = PackedInt32Array(131073, 1703936, 7, 65537, 1703936, 7, 1, 1703936, 7, 2, 1703936, 7, 131074, 1703936, 7, 65538, 1703936, 7, 0, 1703936, 7, 65536, 1703936, 7, 131072, 1703936, 7)
 
-[node name="Weapons" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryTiles"]
-position = Vector2(40.5, 121.5)
+[node name="StorageTiles" type="TileMap" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryContent"]
+position = Vector2(0, 90)
 scale = Vector2(1.5, 1.5)
+tile_set = SubResource("TileSet_s78nx")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 1769472, 6, 65536, 1769472, 6, 131072, 1769472, 6, 196608, 1769472, 6, 1, 1769472, 6, 65537, 1769472, 6, 131073, 1769472, 6, 196609, 1769472, 6, 2, 1769472, 6, 65538, 1769472, 6, 131074, 1769472, 6, 196610, 1769472, 6, 3, 1769472, 6, 65539, 1769472, 6, 131075, 1769472, 6, 196611, 1769472, 6, 4, 1769472, 6, 65540, 1769472, 6, 131076, 1769472, 6, 196612, 1769472, 6, 5, 1769472, 6, 65541, 1769472, 6, 131077, 1769472, 6, 196613, 1769472, 6, 6, 1769472, 6, 65542, 1769472, 6, 131078, 1769472, 6, 196614, 1769472, 6, 7, 1769472, 6, 65543, 1769472, 6, 131079, 1769472, 6, 196615, 1769472, 6, 262144, 1769472, 6, 262145, 1769472, 6, 262146, 1769472, 6, 262147, 1769472, 6, 262148, 1769472, 6, 262149, 1769472, 6, 262150, 1769472, 6, 262151, 1769472, 6)
+
+[node name="Item" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryContent/StorageTiles"]
+position = Vector2(9, 9)
 texture = ExtResource("4_if3v4")
 region_enabled = true
 region_rect = Rect2(32, 224, 16, 16)
 
-[node name="Weapons2" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryTiles"]
-position = Vector2(67.5, 121.5)
-scale = Vector2(1.5, 1.5)
+[node name="Item2" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryContent/StorageTiles"]
+position = Vector2(27, 9)
 texture = ExtResource("4_if3v4")
 region_enabled = true
 region_rect = Rect2(16, 240, 16, 16)
 
-[node name="Weapons3" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryTiles"]
-position = Vector2(94.5, 40.5)
-scale = Vector2(1.5, 1.5)
+[node name="Item3" type="Sprite2D" parent="PanelContainer/NinePatchRect/VBoxContainer/MarginContainer/VBoxContainer/UIContent/MarginContainer/InventoryContent/StorageTiles"]
+position = Vector2(45, 9)
 texture = ExtResource("4_if3v4")
 region_enabled = true
 region_rect = Rect2(32, 64, 16, 16)
