@@ -1,0 +1,17 @@
+{
+	"ItemDefs":
+	[
+		{
+			"Name": "HP Potion",
+			"HPRestored": 50,
+			"ConsumeTime": 2
+		}
+		,{
+			"Name": "2H Sword",
+			"Type": 3,
+			"MinDamage": 3,
+			"MaxDamage": 6,
+			"AttackSpeed": 1.3
+		}
+	]
+}
