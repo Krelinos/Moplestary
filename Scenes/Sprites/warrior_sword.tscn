@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dpb0b0imrxjo7"]
-
-[ext_resource type="Texture2D" uid="uid://bfjy482660t2a" path="res://Assets/UI/Weapons.png" id="1_66spd"]
-
-[node name="2H Sword" type="Sprite2D"]
-texture = ExtResource("1_66spd")
-region_enabled = true
-region_rect = Rect2(16, 16, 16, 16)
