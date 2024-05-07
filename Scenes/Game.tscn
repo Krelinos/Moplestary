@@ -1269,15 +1269,15 @@ position = Vector2(456.667, 126.111)
 MoveSpeed = 220.0
 
 [node name="UI" type="CanvasLayer" parent="."]
+visible = false
 scale = Vector2(1.5, 1.5)
 transform = Transform2D(1.5, 0, 0, 1.5, 0, 0)
 
 [node name="UISkills" parent="UI" instance=ExtResource("12_q0lkq")]
-visible = false
-offset_left = 516.0
-offset_top = 91.3333
-offset_right = 1028.0
-offset_bottom = 431.333
+offset_left = 526.0
+offset_top = 94.6667
+offset_right = 1038.0
+offset_bottom = 434.667
 
 [node name="UIInventory" parent="UI" instance=ExtResource("13_ei3uk")]
 offset_left = 48.0
@@ -1286,3 +1286,12 @@ offset_right = 48.0
 offset_bottom = 71.3333
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(190.833, 146.389)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+position = Vector2(-33.8889, -38.0556)
+build_mode = 1
+polygon = PackedVector2Array(0, 0, 55, 55, 35, 67)
+one_way_collision = true

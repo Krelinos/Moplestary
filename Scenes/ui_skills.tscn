@@ -62,6 +62,7 @@ bg_color = Color(0.176471, 0.176471, 0.176471, 1)
 custom_minimum_size = Vector2(512, 340)
 layout_mode = 3
 anchors_preset = 0
+scale = Vector2(2, 2)
 metadata/_edit_use_anchors_ = true
 
 [node name="PanelContainer" type="PanelContainer" parent="."]

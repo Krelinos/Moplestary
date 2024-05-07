@@ -2,27 +2,44 @@
 	using System;
 	using System.Collections.Generic;
 
-	namespace Moplestary
-	{
+namespace Moplestary
+{
 	public partial class ui_inventory : Control
 	{
-		ItemDatabaseManager ItemDB;
 
 		TileMap EquipTiles;
 		TileMap StorageTiles;
 
-		// Dictionary<Vector2I, Item> Equipment;
-		// Dictionary<Vector2I, Item> Inventory;
+		Dictionary< Vector2I, Guid > Equipment;
+		Dictionary< Vector2I, Guid > Inventory;
+
+		Dictionary< Guid, Item > ItemDB;
+
+		public Vector2I StorageSize;
+		//public int 
+
+		public int MaxStorageCapacity
+		{
+			get
+			{
+				return StorageSize.X * StorageSize.Y;
+			}
+		}
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
-			EquipTiles = GetNode<TileMap>("EquipTiles");
-			StorageTiles = GetNode<TileMap>("StorageTiles");
+			EquipTiles = GetNode< TileMap >("EquipTiles");
+			StorageTiles = GetNode< TileMap >("StorageTiles");
 
-			// Equipment = new Dictionary<Vector2I, Item>();
-			// Inventory = new Dictionary<Vector2I, Item>();
-			ItemDB = new ItemDatabaseManager();
+			Equipment = new Dictionary< Vector2I, Guid >();
+			Inventory = new Dictionary< Vector2I, Guid >();
+
+			ItemDB = ItemDatabaseManager.ItemDatabase;
+
+			StorageSize = new Vector2I( 8, 5 );
+
+			//AddItem(  );
 		}
 
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +68,11 @@
 					GD.Print(StorageTiles.Name + "reports local pos of " + stoTileLocalPos + " and map pos of " + stoTileMapPos);
 				}
 			}
+		}
+
+		public bool TryToAddItem( PackedScene item )
+		{
+			return false;
 		}
 	}
 }

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7vtdn53se6wt"]
+
+[ext_resource type="Texture2D" uid="uid://bfjy482660t2a" path="res://Assets/UI/Weapons.png" id="1_j224a"]
+
+[node name="ArcherBow" type="Sprite2D"]
+texture = ExtResource("1_j224a")
+region_enabled = true
+region_rect = Rect2(48, 320, 16, 16)

@@ -6,15 +6,16 @@ using System.Collections.Generic;
 
 namespace Moplestary
 {
-    public class ItemDatabaseManager
+    public static class ItemDatabaseManager
     {
-        public HashSet< Item > ItemDatabase;
+        public static Dictionary< Guid, Item > ItemDatabase;
 
-        public ItemDatabaseManager()
+        static ItemDatabaseManager()
         {
-            ItemDatabase = new HashSet< Item >();
+            ItemDatabase = new Dictionary< Guid, Item >();
 
             DeserializeBaseItems();
+            GD.Print("bruh");
 
             // ItemDatabase.Add( new Dictionary<String, Object>
             // {
@@ -35,14 +36,14 @@ namespace Moplestary
             
                 var j = JsonSerializer.Serialize( value );
                 GD.Print( "nyaaa" + j );
-#nullable enable
+                #nullable enable
                 Item? k = JsonSerializer.Deserialize<Item>( j );
                 GD.Print( $"name: {k?.Name}" );
             }
         }
 
         // https://docs.godotengine.org/en/stable/tutorials/io/saving_games.html
-        private void DeserializeBaseItems()
+        private static void DeserializeBaseItems()
         {
             String filePath = Godot.ProjectSettings.GlobalizePath("res://Defs/Stuff.json");
             GD.Print( filePath );
@@ -64,11 +65,12 @@ namespace Moplestary
             foreach( Item? item in items.ItemDefs )
             {
                 GD.Print( item );
-                ItemDatabase.Add( item );
+                Guid itemGUID = Guid.NewGuid();
+                ItemDatabase.Add( itemGUID, item );
             }
 
-            foreach( Item item in ItemDatabase )
-                GD.Print( item.Name );
+            foreach( KeyValuePair<Guid, Item> kvp in ItemDatabase )
+                GD.Print( kvp.Value.Name );
 
         }
 
