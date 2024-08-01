@@ -11,7 +11,7 @@ namespace moplestary
 /// An intelligence controlled by the game program itself. Used to control anything that
 /// does not use a character avatar (so wandering monsters and such.)
 /// </summary>
-		partial class ComputerPlayer : Player
+		partial class SimpleAIPlayer : Player
 		{
 
 		}

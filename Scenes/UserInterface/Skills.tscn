@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://7bseuheelvbj"]
 
 [ext_resource type="Theme" uid="uid://c36cdbtsmuvxm" path="res://Assets/MainTheme.tres" id="1_6wmfa"]
-[ext_resource type="Texture2D" uid="uid://c15dgwk1w3sni" path="res://Assets/UI/Sr_Toasty/UI books & more.png" id="1_8ybqr"]
+[ext_resource type="Texture2D" uid="uid://fsf5l1ps54nr" path="res://Assets/UI/Sr_Toasty/UI books & more.png" id="1_8ybqr"]
 
 [node name="Skills" type="VBoxContainer"]
 offset_right = 32.0

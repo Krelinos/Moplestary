@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://g1rov17l6ftn"]
+[gd_scene load_steps=15 format=3 uid="uid://6ir04v1spn64"]
 
-[ext_resource type="Script" path="res://Scripts/Mobs/PlayerCharacter.cs" id="1_rjfor"]
+[ext_resource type="Script" path="res://Scripts/Mobs/Mob.cs" id="1_45xiv"]
 [ext_resource type="Texture2D" uid="uid://uvpxowufj28o" path="res://Assets/dungeontileset-extended.png" id="2_ugyf0"]
+[ext_resource type="Script" path="res://Scripts/Players/HumanPlayer.cs" id="3_dkgwl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v38yp"]
 
@@ -88,7 +89,10 @@ animations = [{
 
 [node name="MyCharacter" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("1_rjfor")
+script = ExtResource("1_45xiv")
+MoveSpeed = 50
+JumpPower = 200
+PlayerPath = NodePath("Player")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -107,5 +111,8 @@ collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="RangedAttackTargetingArea"]
 polygon = PackedVector2Array(0, -8, 0, 8, 192, 32, 192, -32)
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("3_dkgwl")
 
 [connection signal="area_entered" from="RangedAttackTargetingArea" to="." method="_OnProjectileTargetAreaAreaEntered"]

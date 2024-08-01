@@ -1,13 +1,26 @@
 using Godot;
 using System;
+using moplestary.players;
+using System.Runtime.CompilerServices;
 
-<<<<<<< Updated upstream
-public abstract partial class Mob : CharacterBody2D
+namespace moplestary { namespace mobs {
+
+partial class Mob : CharacterBody2D
 {
-    [Export] public float MoveSpeed = 160f;
-	[Export] public float JumpPower = -700f;
 
-	protected float GRAVITY = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+    [Export] public uint MoveSpeed
+    {
+        get { return _MoveSpeed; }
+        protected set { _MoveSpeed = value; }
+    }
+	[Export] public uint JumpPower
+    {
+        get { return _JumpPower; }
+        protected set { _JumpPower = value; }
+    }
+    [Export] public NodePath PlayerPath;
+
+	protected readonly float GRAVITY = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	protected AnimatedSprite2D Sprite;
 	protected CollisionShape2D CollisionShape;
@@ -23,89 +36,107 @@ public abstract partial class Mob : CharacterBody2D
 		// set {  }
 	}
 
-    // -1 | Mob is moving left. 0 | Mob is still in the x-axis. 1 | Mob is moving right.
-	protected int movementDirection;
-
     // When dropping down a platform, the Mob ignores _Terrain collision.
     // Once the Mob's Global Y-Axis becomes greater than this number,
     // The Mob will react to _Terrain collision once more.
     protected float dropdownThreshold;
 
 	protected bool facingLeft;
-    protected Vector2 velocity;
+
+    protected Player Player
+    {
+        get { return _Player; }
+        set
+        {
+            if ( _Player != null )
+                _Player.HMovementChanged -= OnPlayerHMovementChanged;
+
+            _Player = value;
+            _Player.HMovementChanged += OnPlayerHMovementChanged;
+        }
+    }
+
+    protected Player _Player;
+    protected uint _MoveSpeed;
+    protected uint _JumpPower;
 
 	public override void _Ready()
 	{
+        Player = GetNode<Player>( PlayerPath );
+
 		Sprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		CollisionShape = GetNode<CollisionShape2D>("CollisionShape2D");
 		_Terrain = GetNode<TileMap>("/root/Game/Terrain");
-
-        movementDirection = 0;
 	}
 
     public override void _PhysicsProcess(double delta)
 	{
-		velocity = Velocity;
+		var _velocity = Velocity;
 
         // Add the gravity.
 		if ( !IsOnFloor() )
-			velocity.Y += GRAVITY * (float)delta;
+			_velocity.Y += GRAVITY * (float)delta;
         
         // Check dropdown threshold.
-        if ( CollisionShape.Disabled == true )
-			if ( GlobalPosition.Y > dropdownThreshold )
-				CollisionShape.Disabled = false;
+        // if ( CollisionShape.Disabled == true )
+		// 	if ( GlobalPosition.Y > dropdownThreshold )
+		// 		CollisionShape.Disabled = false;
         
-        Move();
+        HMovement( ref _velocity, (float)delta );
+
+        if ( Player.Jumping && IsOnFloor() )
+            if ( Player.VMovement == 1 )
+                DropDown( ref _velocity );
+            else
+                Jump( ref _velocity );
 
         // Update sprite stuff.
         SpriteStuff();
 
-        Velocity = velocity;
+        Velocity = _velocity;
         MoveAndSlide();
     }
 
-    protected virtual void Move()
+    protected virtual void HMovement( ref Vector2 velocity, float delta )
     {
-        if( movementDirection == 0 )
+        if( Player.HMovement == 0 )
         {
             // For mobs, conserve X-axis velocity until on ground.
             // For players, automatically try to reach 0 velocity in X-axis when airbone.
-            if( IsOnFloor() )   // Keep for mobs, remove for players
-			    velocity.X = Mathf.MoveToward(Velocity.X, 0, MoveSpeed);
+            // if( IsOnFloor() )   // Keep for mobs, remove for players
+			//     velocity.X = Mathf.MoveToward( velocity.X, 0, MoveSpeed*delta );
         }
-        else
-            velocity.X = movementDirection * MoveSpeed;
+            // Accelerate toward max speed
+            velocity.X = Mathf.MoveToward( velocity.X, Player.HMovement * MoveSpeed, MoveSpeed*delta*10 );
     }
 
     protected virtual void SpriteStuff()
     {
         // facingLeft should also be used for anything else that needs to be mirrored
         // such as weapons for player characters.
-        if ( velocity.X < 0 )
-            facingLeft = true;
-        else
-            if ( velocity.X > 0 )
-                facingLeft = false;
+        // if ( velocity.X < 0 )
+        //     facingLeft = true;
+        // else
+        //     if ( velocity.X > 0 )
+        //         facingLeft = false;
 
-        Sprite.FlipH = facingLeft;
+        // Sprite.FlipH = facingLeft;
 
         if ( !IsOnFloor() )
             Sprite.Play("jump");
         else
-            if ( velocity.X != 0f )
+            if ( Player.HMovement != 0f )
                 Sprite.Play("moving");
             else
                 Sprite.Play("idle");
     }
 
-    protected virtual void Jump()
+    protected virtual void Jump( ref Vector2 velocity )
     {
-        if ( IsOnFloor() )
-			velocity.Y = JumpPower;
+		velocity.Y = -JumpPower;
     }
 
-    protected virtual void DropDown()
+    protected virtual void DropDown( ref Vector2 velocity )
     {
         // Check if DropDown-able
         Vector2 hitboxBottom = GlobalPosition + ( new Vector2(0, 8) );
@@ -130,64 +161,23 @@ public abstract partial class Mob : CharacterBody2D
 		GD.Print( Name + " took " + amount + " damage from " + attacker.Name + " using a " + inflicter.Name );
 	}
 
-}
-=======
-namespace moplestary
-{
-    namespace entities
+    /// <returns>False if the Mob is atop of a floor collision or holding onto a ladder/rope(TODO). True otherwise.</returns>
+    protected bool IsAirborne()
     {
-/// <summary>
-/// A Mob is any entity that is not part of the scenery or terrain and can move.
-/// Contains
-/// </summary>
-        partial class Mob : Node2D, IControllableMovement
-        {
-            [Export] protected bool canMoveHorizontal = true;
-            [Export] protected bool canJump = true;
-            [Export] protected bool canDropdown = true;
+        if ( IsOnFloor() )
+            return false;
+        return true;
+    }
 
-            protected short moveHorizontal;
+    protected void OnPlayerHMovementChanged( sbyte newVal, sbyte oldVal )
+    {
+        if ( newVal == -1 )
+            Sprite.Scale = new Vector2( -1, 1 );
+        else if ( newVal == 1 )
+            Sprite.Scale = new Vector2( 1, 1 );
+    }
 
-            bool IControllableMovement.CanMoveHorizontal
-            {
-                get { return canMoveHorizontal; }
-                set { canMoveHorizontal = value; }
-            }
-            bool IControllableMovement.CanJump
-            {
-                get { return canJump; }
-                set { canJump = value; }
-            }
-            bool IControllableMovement.CanDropdown
-            {
-                get { return canDropdown; }
-                set { canDropdown = value; }
-            }
+}
 
-            void IControllableMovement.MoveLeft() { moveHorizontal = -1; }
-            void IControllableMovement.MoveRight() { moveHorizontal = 1; }
-            void IControllableMovement.StopMoving() { moveHorizontal = 0; }
-
-            void IControllableMovement.Dropdown() { throw new NotImplementedException(); }
-            void IControllableMovement.Jump() { throw new NotImplementedException(); }
-        }
-
-/// <summary>
-/// Used to abstract movement control over an entity. Both user and computer players
-/// use this to issue movement commands to an entity.
-/// </summary>
-        interface IControllableMovement
-        {
-            bool CanMoveHorizontal { get; protected set; }
-            bool CanJump { get; protected set; }
-            bool CanDropdown { get; protected set; }
-
-            void MoveLeft();
-            void MoveRight();
-            void StopMoving();
-            void Dropdown();
-            void Jump();
-        }
-    } // namespace entities
+} // namespace mobs
 } // namespace moplestary
->>>>>>> Stashed changes
