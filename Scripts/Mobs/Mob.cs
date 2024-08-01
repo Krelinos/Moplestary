@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+<<<<<<< Updated upstream
 public abstract partial class Mob : CharacterBody2D
 {
     [Export] public float MoveSpeed = 160f;
@@ -130,3 +131,63 @@ public abstract partial class Mob : CharacterBody2D
 	}
 
 }
+=======
+namespace moplestary
+{
+    namespace entities
+    {
+/// <summary>
+/// A Mob is any entity that is not part of the scenery or terrain and can move.
+/// Contains
+/// </summary>
+        partial class Mob : Node2D, IControllableMovement
+        {
+            [Export] protected bool canMoveHorizontal = true;
+            [Export] protected bool canJump = true;
+            [Export] protected bool canDropdown = true;
+
+            protected short moveHorizontal;
+
+            bool IControllableMovement.CanMoveHorizontal
+            {
+                get { return canMoveHorizontal; }
+                set { canMoveHorizontal = value; }
+            }
+            bool IControllableMovement.CanJump
+            {
+                get { return canJump; }
+                set { canJump = value; }
+            }
+            bool IControllableMovement.CanDropdown
+            {
+                get { return canDropdown; }
+                set { canDropdown = value; }
+            }
+
+            void IControllableMovement.MoveLeft() { moveHorizontal = -1; }
+            void IControllableMovement.MoveRight() { moveHorizontal = 1; }
+            void IControllableMovement.StopMoving() { moveHorizontal = 0; }
+
+            void IControllableMovement.Dropdown() { throw new NotImplementedException(); }
+            void IControllableMovement.Jump() { throw new NotImplementedException(); }
+        }
+
+/// <summary>
+/// Used to abstract movement control over an entity. Both user and computer players
+/// use this to issue movement commands to an entity.
+/// </summary>
+        interface IControllableMovement
+        {
+            bool CanMoveHorizontal { get; protected set; }
+            bool CanJump { get; protected set; }
+            bool CanDropdown { get; protected set; }
+
+            void MoveLeft();
+            void MoveRight();
+            void StopMoving();
+            void Dropdown();
+            void Jump();
+        }
+    } // namespace entities
+} // namespace moplestary
+>>>>>>> Stashed changes

@@ -3,20 +3,23 @@ config_version=5
 [application]
 
 config/name="Moplestary"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/Main.tscn"
 config/features=PackedStringArray("4.1", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/viewport_width=1280
-window/size/viewport_height=768
-window/size/resizable=false
-window/stretch/mode="canvas_items"
+window/size/viewport_height=720
+window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="Moplestary"
+
+[gui]
+
+theme/custom="res://Assets/MainTheme.tres"
 
 [input]
 
@@ -68,4 +71,4 @@ Shoot={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
