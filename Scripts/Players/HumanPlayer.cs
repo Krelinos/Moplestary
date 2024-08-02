@@ -30,37 +30,37 @@ partial class HumanPlayer : Player
         // be the direction the HumanPlayer will transmit. Based on "null movement
         // scripts" for Team Fortress 2.
         if ( Input.IsActionJustPressed(INPUT_MOVE_LEFT) )
-            _HMovement = -1;
+            HMovement = -1;
         else if ( Input.IsActionJustReleased(INPUT_MOVE_LEFT) )
             if ( Input.IsActionPressed(INPUT_MOVE_RIGHT) )
-                _HMovement = 1;
+                HMovement = 1;
             else
-                _HMovement = 0;
+                HMovement = 0;
         
         if ( Input.IsActionJustPressed(INPUT_MOVE_RIGHT) )
-            _HMovement = 1;
+            HMovement = 1;
         else if ( Input.IsActionJustReleased(INPUT_MOVE_RIGHT) )
             if ( Input.IsActionPressed(INPUT_MOVE_LEFT) )
-                _HMovement = -1;
+                HMovement = -1;
             else
-                _HMovement = 0;
+                HMovement = 0;
         
         // Vertical null movement ( Note: Up vector is (0,-1) in Godot )
         if ( Input.IsActionJustPressed(INPUT_MOVE_UP) )
-            _VMovement = -1;
+            VMovement = -1;
         else if ( Input.IsActionJustReleased(INPUT_MOVE_UP) )
             if ( Input.IsActionPressed(INPUT_MOVE_DOWN) )
-                _VMovement = 1;
+                VMovement = 1;
             else
-                _VMovement = 0;
+                VMovement = 0;
         
         if ( Input.IsActionJustPressed(INPUT_MOVE_DOWN) )
-            _VMovement = 1;
+            VMovement = 1;
         else if ( Input.IsActionJustReleased(INPUT_MOVE_DOWN) )
             if ( Input.IsActionPressed(INPUT_MOVE_UP) )
-                _VMovement = -1;
+                VMovement = -1;
             else
-                _VMovement = 0;
+                VMovement = 0;
         
         // Input consideration for jumping is after vertical movement as
         // players trying to dropdown can hit down and jump on the same frame.
@@ -68,7 +68,6 @@ partial class HumanPlayer : Player
             Jumping = true;
         else if ( Input.IsActionJustReleased(INPUT_MOVE_JUMP) )
             Jumping = false;
-        
     }
 }
 
@@ -99,6 +98,7 @@ abstract partial class Player : Node
             }
         }
     }
+
     public sbyte VMovement
     {
         get { return _VMovement; }
@@ -110,10 +110,11 @@ abstract partial class Player : Node
             {
                 var oldVal = _VMovement;
                 _VMovement = newVal;
-                EmitSignal( nameof(HMovementChanged), newVal, oldVal );
+                EmitSignal( nameof(VMovementChanged), newVal, oldVal );
             }
         }
     }
+
     public bool Jumping
     {
         get { return _Jumping; }
@@ -130,16 +131,6 @@ abstract partial class Player : Node
     protected sbyte _HMovement;
     protected sbyte _VMovement;
     protected bool _Jumping;
-
-    protected Player()
-    {
-        
-    }
-
-    public override void _Ready()
-    {
-        base._Ready();
-    }
 }
 
 } // namespace players
